@@ -1,0 +1,13 @@
+server:
+  port: 9051
+
+spring.kafka:
+  bootstrap-servers: localhost:9092
+  producer:
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

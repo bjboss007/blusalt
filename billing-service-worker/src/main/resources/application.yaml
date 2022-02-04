@@ -1,0 +1,36 @@
+server:
+  port: 9053
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  sql:
+    init:
+      platform: mysql
+
+  datasource.url: jdbc:mysql://localhost:${app.database.port}/${app.database.name}?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+  datasource.username: habib
+  datasource.password: m
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+
+spring.kafka:
+  bootstrap-servers: localhost:9092
+  consumer:
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: com.example.billing.Config.TransactionDeserializer
+    properties:
+      spring:
+        json:
+          trusted:
+            packages: "*"
+
+
+
+
+app.database.name: blusalt_billing
+app.database.port: 3306
