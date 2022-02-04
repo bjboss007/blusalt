@@ -10,7 +10,6 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>billing-service-worker</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>billing-service-worker</name>
     <description>billing-service-worker</description>
     <properties>
