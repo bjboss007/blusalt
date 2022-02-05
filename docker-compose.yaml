@@ -56,9 +56,12 @@ services:
       - MYSQL_USER=root
       - MYSQL_DATABASE=blusalt_billing
       - MYSQL_PASSWORD
+#    volumes:
+#      - db:/var/lib/mysql
 
   customer_service_sql:
     image: mysql:5.7
+    restart: unless-stopped
     ports:
       - "3306:3306"
     environment:
@@ -66,6 +69,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_DATABASE=blusalt_customer
       - MYSQL_PASSWORD
+    volumes:
+      - db:/var/lib/mysql
 
   zookeeper:
     image: confluentinc/cp-zookeeper:6.2.1
@@ -105,3 +110,6 @@ services:
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+
+volumes:
+  customer_service_sql:

@@ -10,6 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>Billing</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Billing</name>
     <description>Billing</description>
     <properties>

@@ -11,6 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>billing-service-worker</artifactId>
     <name>billing-service-worker</name>
+    <version>0.0.1-SNAPSHOT</version>
     <description>billing-service-worker</description>
     <properties>
         <java.version>11</java.version>
