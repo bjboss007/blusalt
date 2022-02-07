@@ -1,14 +1,12 @@
-package com.example.billing;
+package com.example.billing.api;
 
 
-import com.example.billing.model.Transaction;
 import com.example.billing.service.BillingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/billings")
@@ -18,7 +16,7 @@ public class BillingController {
     private BillingService billingService;
 
     @GetMapping
-    public List<Transaction> fetchAll(){
-        return billingService.getAllTransactions();
+    public ResponseEntity<?> fetchAll(){
+        return ResponseEntity.ok(billingService.getAllTransactions());
     }
 }

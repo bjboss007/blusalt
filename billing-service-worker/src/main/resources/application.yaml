@@ -1,5 +1,5 @@
 server:
-  port: 9053
+  port: ${SERVER_PORT:9098}
 
 spring:
   mvc:
@@ -7,22 +7,22 @@ spring:
       matching-strategy: ant_path_matcher
   sql:
     init:
-      platform: mysql
+      platform: ${DATA_PLATFORM:mysql}
 
-  datasource.url: jdbc:mysql://localhost:${app.database.port}/${app.database.name}?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-  datasource.username: habib
-  datasource.password: m
+  datasource.url: ${SPRING_DATASOURCE_URL:${app.database.url}}
+  datasource.username: ${SPRING_DATASOURCE_USERNAME:habib}
+  datasource.password: ${SPRING_DATASOURCE_PASSWORD:m}
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
 
 spring.kafka:
-  bootstrap-servers: localhost:9092
+  bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
   consumer:
     key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    value-deserializer: com.example.billing.Config.TransactionDeserializer
+    value-deserializer: com.example.billingshared.config.TransactionDeserializer
     properties:
       spring:
         json:
@@ -34,3 +34,4 @@ spring.kafka:
 
 app.database.name: blusalt_billing
 app.database.port: 3306
+app.database.url: jdbc:mysql://localhost:${app.database.port}/${app.database.name}?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC

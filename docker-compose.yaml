@@ -1,74 +1,76 @@
-version: '3'
+version: '3.8'
 services:
   billingservice:
-    image: billingservice
-    build: .
+    container_name: billingservice
+    build:
+      context: ./billing-service
+      dockerfile: Dockerfile
     ports:
       - "9099:9099"
-    restart: always
     depends_on:
-      - blusalt_sql
+      - db
       - zookeeper
       - broker
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://127.0.0.1:3306/blusalt_billing
+      - DATA_PLATFORM=mysql
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db/blusalt_billing
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SERVER_PORT=9099
+#      - KAFKA_BOOTSTRAP_SERVER=http://broker:9092
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:9092
+
   customerservice:
-    image: customerservice
-    build: .
+    container_name: customerservice
+    build:
+      context: ./billing-service
+      dockerfile: Dockerfile
     ports:
       - "9097:9097"
-    restart: always
     depends_on:
-      - customer_service_sql
+      - db
       - zookeeper
       - broker
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://127.0.0.1:3306/blusalt_billing
+      - DATA_PLATFORM=mysql
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db/blusalt_billing
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SERVER_PORT=9097
+#      - KAFKA_BOOTSTRAP_SERVER=http://broker:9092
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:9092
 
   billingserviceworker:
-    image: billingserviceworker
-    build: .
+    container_name: billingserviceworker
+    build:
+      context: ./billing-service-worker
+      dockerfile: Dockerfile
     ports:
       - "9098:9098"
-    restart: always
     depends_on:
-      - blusalt_sql
+      - db
       - zookeeper
       - broker
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://127.0.0.1:3306/blusalt_billing
+      - DATA_PLATFORM=mysql
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db/blusalt_billing
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=password
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SERVER_PORT=9098
+#      - KAFKA_BOOTSTRAP_SERVER=http://broker:9092
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=broker:9092
 
-  blusalt_sql:
+  db:
     image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_USER=root
       - MYSQL_DATABASE=blusalt_billing
-      - MYSQL_PASSWORD
-#    volumes:
-#      - db:/var/lib/mysql
-
-  customer_service_sql:
-    image: mysql:5.7
-    restart: unless-stopped
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_USER=root
-      - MYSQL_DATABASE=blusalt_customer
-      - MYSQL_PASSWORD
     volumes:
       - db:/var/lib/mysql
 
@@ -112,4 +114,4 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
 
 volumes:
-  customer_service_sql:
+  db:

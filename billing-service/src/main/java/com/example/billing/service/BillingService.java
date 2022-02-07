@@ -1,9 +1,8 @@
 package com.example.billing.service;
-
-import com.example.billing.dto.FundAccountDTO;
-import com.example.billing.dto.Status;
-import com.example.billing.model.Transaction;
-import com.example.billing.repository.TransactionRepository;
+import com.example.billingshared.dto.FundAccountDTO;
+import com.example.billingshared.dto.Status;
+import com.example.billingshared.model.Transaction;
+import com.example.billingshared.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;

@@ -22,7 +22,7 @@ import java.util.Set;
 public class SwaggerConfig implements WebMvcConfigurer {
 
     public static final Contact DEFAULT_CONTACT = new Contact("Muhammad Habib Mobolaji", "", "mobolajihabib@gmail.com");
-    private static final ApiInfo DEFAULT_API_INFO = new ApiInfo("Food Vendor Application",
+    private static final ApiInfo DEFAULT_API_INFO = new ApiInfo("Blusalt Application",
             "Blusalt Billing Api Documentation", "1.0", "urn:tos", DEFAULT_CONTACT,
             "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList());
     private static final Set<String> DEFAULT_PRODUCES_AND_CONSUMES = new HashSet<>(Arrays.asList("application/json"));

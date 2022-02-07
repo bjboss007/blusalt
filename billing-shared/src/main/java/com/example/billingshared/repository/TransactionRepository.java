@@ -1,7 +1,7 @@
-package com.example.billing.repository;
+package com.example.billingshared.repository;
 
 
-import com.example.billing.model.Transaction;
+import com.example.billingshared.model.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

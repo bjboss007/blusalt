@@ -1,8 +1,8 @@
 server:
-  port: 9051
+  port: ${SERVER_PORT:9097}
 
 spring.kafka:
-  bootstrap-servers: localhost:9092
+  bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
   producer:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -11,3 +11,21 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
+  sql:
+    init:
+      platform: mysql
+
+    datasource.url: ${SPRING_DATASOURCE_URL:${app.database.url}}
+    datasource.username: ${SPRING_DATASOURCE_USERNAME:habib}
+    datasource.password: ${SPRING_DATASOURCE_PASSWORD:m}
+
+    jpa:
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+      hibernate:
+        ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+
+
+app.database.name: blusalt_billing
+app.database.port: 3306
+app.database.url: jdbc:mysql://localhost:${app.database.port}/${app.database.name}?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC

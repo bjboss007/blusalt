@@ -1,6 +1,6 @@
 package com.example.billing.Config;
 
-import com.example.billing.dto.FundAccountDTO;
+import com.example.billingshared.dto.FundAccountDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.kafka.common.errors.SerializationException;

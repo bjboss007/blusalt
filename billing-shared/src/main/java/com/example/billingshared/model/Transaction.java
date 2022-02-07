@@ -1,4 +1,4 @@
-package com.example.billing.model;
+package com.example.billingshared.model;
 
 
 import lombok.AllArgsConstructor;

@@ -1,11 +1,12 @@
-package com.example.billing.Config;
+package com.example.billingshared.config;
 
-import com.example.billing.dto.FundAccountDTO;
-import com.example.billing.model.Transaction;
+
+import com.example.billingshared.model.Transaction;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Deserializer;
+
 
 import java.util.Map;
 
@@ -17,7 +18,6 @@ public class TransactionDeserializer implements Deserializer<Transaction> {
         objectMapper.registerModule(new JavaTimeModule());
         try {
             if (bytes == null){
-                System.out.println("Null received at deserializing");
                 return null;
             }
 
